@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/Components/app_card.dart';
+import 'package:flutter_application/Components/input_card.dart';
 import 'package:flutter_application/Components/base_layout.dart';
 
 class AddKontobewegung extends StatefulWidget {
@@ -29,7 +31,7 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
-      selectedIndex: 1,
+      selectedIndex: 2,
       child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
         child: Column(
@@ -66,7 +68,7 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
             const SizedBox(height: 25),
 
             // 📎 Upload
-            _card(
+            AppCard(
               child: Row(
                 children: [
                   const Icon(Icons.upload_file, size: 28),
@@ -84,7 +86,7 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
             const SizedBox(height: 20),
 
             // 🧾 Konto
-            _card(
+            AppCard(
               child: Row(
                 children: [
                   const Text(
@@ -101,12 +103,24 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
                     underline: const SizedBox(),
                     items: [
                       DropdownMenuItem(
+                        value: "Gesamt",
+                        child: Text("Gesamt"),
+                      ),
+                      DropdownMenuItem(
                         value: "Konto Sparkasse",
                         child: Text("Konto Sparkasse"),
                       ),
                       DropdownMenuItem(
-                        value: "Konto Volksbank",
-                        child: Text("Konto Volksbank"),
+                        value: "Tagesgeldkonto Volksbank",
+                        child: Text("Tagesgeldkonto Volksbank"),
+                      ),
+                      DropdownMenuItem(
+                        value: "Bargeld",
+                        child: Text("Bargeld"),
+                      ),
+                      DropdownMenuItem(
+                        value: "Trade Republic",
+                        child: Text("Trade Republic"),
                       ),
                     ],
                     onChanged: (v) => setState(() => konto = v!),
@@ -118,7 +132,7 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
             const SizedBox(height: 20),
 
             // 📅 Datum
-            _card(
+            AppCard(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -147,17 +161,17 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
             const SizedBox(height: 20),
 
             // 👤 Sender / Empfänger
-            _inputCard("Absender/Empfänger", _senderController),
+            InputCard(label: "Absender/Empfänger", controller: _senderController),
 
             const SizedBox(height: 20),
 
             // 📝 Verwendungszweck
-            _inputCard("Verwendungszweck", _purposeController),
+            InputCard(label: "Verwendungszweck", controller: _purposeController),
 
             const SizedBox(height: 20),
 
             // 🔄 Ein/Ausgabe
-            _card(
+            AppCard(
               child: Row(
                 children: [
                   const Text(
@@ -187,7 +201,7 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
             const SizedBox(height: 20),
 
             // 🏷 Kategorie
-            _card(
+            AppCard(
               child: Row(
                 children: [
                   const Text(
@@ -239,7 +253,7 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
             const SizedBox(height: 20),
 
             // 🔁 Wiederkehrende Buchung
-            _card(
+            AppCard(
               child: Row(
                 children: [
                   const Text(
@@ -311,52 +325,6 @@ class _AddKontobewegungState extends State<AddKontobewegung> {
             const SizedBox(height: 40),
           ],
         ),
-      ),
-    );
-  }
-
-  // 🔹 Универсальная карточка
-  Widget _card({required Widget child}) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: child,
-    );
-  }
-
-  // 🔹 Карточка с TextField
-  Widget _inputCard(String label, TextEditingController controller) {
-    return _card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: controller,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/Views/home_page.dart';
 import 'package:flutter_application/Views/add_kontobewegung.dart';
+import 'package:flutter_application/Views/konto_auswertung_screen.dart';
+import 'package:flutter_application/Views/finanzplaner_screen.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class BaseLayout extends StatefulWidget {
@@ -47,7 +49,21 @@ class _BaseLayoutState extends State<BaseLayout> {
       case 1:
         Navigator.pushReplacement(
           context,
+          MaterialPageRoute(
+            builder: (_) => const KontoAuswertungScreen(),
+          ),
+        );
+        break;
+      case 2:
+        Navigator.pushReplacement(
+          context,
           MaterialPageRoute(builder: (_) => const AddKontobewegung()),
+        );
+        break;
+      case 3:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const FinanzplanerScreen()),
         );
         break;
     }
@@ -59,17 +75,47 @@ class _BaseLayoutState extends State<BaseLayout> {
       backgroundColor: const Color(0xfff5f5f5),
 
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: widget.selectedIndex,
         onTap: _onNavTap,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        iconSize: 26,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline), label: ""),
-          BottomNavigationBarItem(icon: Icon(Symbols.bar_chart), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+          BottomNavigationBarItem(
+            icon: SizedBox(width: 28, height: 28, child: Icon(Icons.home)),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: SizedBox(
+              width: 28,
+              height: 28,
+              child: Icon(Symbols.data_usage),
+            ),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: SizedBox(
+              width: 28,
+              height: 28,
+              child: Icon(Icons.add_circle_outline),
+            ),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: SizedBox(
+              width: 28,
+              height: 28,
+              child: Icon(Symbols.bar_chart),
+            ),
+            label: "",
+          ),
+          BottomNavigationBarItem(
+            icon: SizedBox(width: 28, height: 28, child: Icon(Icons.person)),
+            label: "",
+          ),
         ],
       ),
 
